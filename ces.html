@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Celsius to Fahrenheit Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #converter {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff; /* Light background */
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        #result {
+            display: none;
+            margin-top: 20px;
+            animation: slide-in 1s;
+        }
+        @keyframes slide-in {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Dark theme */
+        body.dark-theme {
+            background-color: #333; /* Dark background */
+            color: #fff; /* Light text */
+        }
+        #converter.dark-theme {
+            background-color: #444; /* Dark background for the converter */
+        }
+    </style>
+</head>
+<body>
+    <div id="converter">
+        <h2>Celsius to Fahrenheit Converter</h2>
+        <input type="number" id="celsiusInput" placeholder="Enter Celsius">
+        <button onclick="convert()">Convert</button>
+        <div id="result">
+            <p><span id="celsiusValue"></span>°C is equal to <span id="fahrenheitValue"></span>°F</p>
+        </div>
+        <button onclick="toggleDarkTheme()">Toggle Dark Theme</button>
+    </div>
+    <script>
+        function convert() {
+            const celsiusInput = document.getElementById('celsiusInput');
+            const fahrenheitValue = document.getElementById('fahrenheitValue');
+            const celsiusValue = parseFloat(celsiusInput.value);
+            
+            if (!isNaN(celsiusValue)) {
+                const fahrenheit = (celsiusValue * 9/5) + 32;
+                fahrenheitValue.textContent = fahrenheit.toFixed(2);
+                document.getElementById('celsiusValue').textContent = celsiusValue;
+                document.getElementById('result').style.display = 'block';
+            } else {
+                alert("Please enter a valid number for Celsius temperature.");
+            }
+        }
+
+        function toggleDarkTheme() {
+            document.body.classList.toggle('dark-theme');
+            document.getElementById('converter').classList.toggle('dark-theme');
+        }
+    </script>
+</body>
+</html>
